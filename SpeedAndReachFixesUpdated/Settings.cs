@@ -1,9 +1,11 @@
 using Mutagen.Bethesda.FormKeys.SkyrimSE;
+using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.WPF.Reflection.Attributes;
 using Noggog;
 using SpeedAndReachFixesUpdated.GMST;
 using SpeedAndReachFixesUpdated.SettingObjects;
+using System;
 using System.Collections.Generic;
 
 namespace SpeedAndReachFixesUpdated
@@ -40,20 +42,20 @@ namespace SpeedAndReachFixesUpdated
         [Tooltip("Change the stats of each weapon type.")]
         public List<WeaponStats> WeaponStats { get; set; } = new()
         {
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeSword, 1.1F, 0.83F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeDagger, 1.35F, 0.533F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeWarAxe, 1F, 0.6F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeMace, 0.9F, 0.75F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeGreatsword, 0.85F, 0.88F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeBattleaxe, 0.666667F, 0.8275F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeWarhammer, 0.6F, 0.8F),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeSword, 1.1F, 0.83F, keywordEditorId: "WeapTypeSword"),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeDagger, 1.35F, 0.533F, keywordEditorId: "WeapTypeDagger"),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeWarAxe, 1F, 0.6F, keywordEditorId: "WeapTypeWarAxe"),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeMace, 0.9F, 0.75F, keywordEditorId: "WeapTypeMace"),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeGreatsword, 0.85F, 0.88F, keywordEditorId: "WeapTypeGreatsword"),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeBattleaxe, 0.666667F, 0.8275F, keywordEditorId: "WeapTypeBattleaxe"),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeWarhammer, 0.6F, 0.8F, keywordEditorId: "WeapTypeWarhammer"),
 
-            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeRapier, Constants.NullFloat, 1.12F, enableSpeed: false),
-            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeClaw, Constants.NullFloat, 0.6F, enableSpeed: false),
-            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeQtrStaff, Constants.NullFloat, 0.8F, enableSpeed: false),
-            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeWhip, Constants.NullFloat, 1.5F, enableSpeed: false),
-            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypePike, Constants.NullFloat, 1.2F, enableSpeed: false),
-            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeHalberd, Constants.NullFloat, 1.0F, enableSpeed: false),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeRapier, Constants.NullFloat, 1.12F, enableSpeed: false, keywordEditorId: "WeapTypeRapier"),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeClaw, Constants.NullFloat, 0.6F, enableSpeed: false, keywordEditorId: "WeapTypeClaw"),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeQtrStaff, Constants.NullFloat, 0.8F, enableSpeed: false, keywordEditorId: "WeapTypeQtrStaff"),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeWhip, Constants.NullFloat, 1.5F, enableSpeed: false, keywordEditorId: "WeapTypeWhip"),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypePike, Constants.NullFloat, 1.2F, enableSpeed: false, keywordEditorId: "WeapTypePike"),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeHalberd, Constants.NullFloat, 1.0F, enableSpeed: false, keywordEditorId: "WeapTypeHalberd"),
         };
 
         [SettingName("Verbose Log")]
@@ -67,6 +69,24 @@ namespace SpeedAndReachFixesUpdated
         public float GetModifiedStrikeAngle(float current)
         {
             return current += AttackStrikeAngleModifier;
+        }
+
+        /// <summary>
+        /// Resolves any stat categories that use Keyword Editor ID instead of a FormKey.
+        /// </summary>
+        public void ResolveWeaponStatKeywords(ILinkCache linkCache)
+        {
+            foreach (var stats in WeaponStats)
+            {
+                if (stats.ResolveKeyword(linkCache))
+                    continue;
+
+                if (string.IsNullOrWhiteSpace(stats.KeywordEditorID))
+                    continue;
+
+                Console.WriteLine(
+                    $"Warning: Could not resolve keyword Editor ID '{stats.KeywordEditorID}' from the load order. This stat category will be skipped.");
+            }
         }
 
         // Private function that retrieves the highest priority applicable WeaponStats instance from the current settings

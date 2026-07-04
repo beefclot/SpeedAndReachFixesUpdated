@@ -26,6 +26,8 @@ namespace SpeedAndReachFixesUpdated
         {
             Console.WriteLine("\n\nInitialization successful, beginning patcher process...\n");
 
+            Settings.ResolveWeaponStatKeywords(state.LinkCache);
+
             // initialize the modified record counter, and add Game Setting changes to the patch.
             var count = Settings.GameSettings.AddGameSettingsToPatch(state);
 

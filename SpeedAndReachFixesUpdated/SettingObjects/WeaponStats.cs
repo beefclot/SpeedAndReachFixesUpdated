@@ -1,4 +1,5 @@
 using Mutagen.Bethesda.Plugins;
+using Mutagen.Bethesda.Plugins.Cache;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.WPF.Reflection.Attributes;
 using Noggog;
@@ -9,14 +10,21 @@ namespace SpeedAndReachFixesUpdated.SettingObjects
     /// <summary>
     /// Represents the stats associated with a given weapon keyword, as well as a priority level which determines the winning category if a weapon has multiple keywords.
     /// </summary>
-    [ObjectNameMember(nameof(Keyword))]
+    [ObjectNameMember(nameof(KeywordEditorID))]
     public class WeaponStats
     {
         [MaintainOrder]
 
+        [SettingName("Keyword Editor ID")]
+        [Tooltip("Editor ID of the keyword to match. Used at patch time when Keyword is empty. Can be configured before the keyword exists in your load order.")]
+        public string KeywordEditorID = string.Empty;
+
         [FormLinkPickerCustomization(typeof(IKeywordGetter))]
-        [Tooltip("The keyword/type of weapon that this category applies to. Search by Editor ID, FormKey, or FormID from the active load order.")]
+        [Tooltip("Optional FormKey picker. When set, this takes priority over Keyword Editor ID. Leave empty to resolve by Editor ID when patching.")]
         public IFormLinkGetter<IKeywordGetter> Keyword = FormLink<IKeywordGetter>.Null;
+
+        [Ignore]
+        private IFormLinkGetter<IKeywordGetter> _resolvedKeyword = FormLink<IKeywordGetter>.Null;
 
         [Tooltip("If multiple categories could apply to the same weapon, the highest priority one wins.")]
         public int Priority;
@@ -56,7 +64,8 @@ namespace SpeedAndReachFixesUpdated.SettingObjects
             float speed = Constants.NullFloat,
             float reach = Constants.NullFloat,
             bool enableReach = true,
-            bool enableSpeed = true)
+            bool enableSpeed = true,
+            string keywordEditorId = "")
         {
             Priority = priority;
             IsAdditiveModifier = modifier;
@@ -65,6 +74,7 @@ namespace SpeedAndReachFixesUpdated.SettingObjects
             Speed = speed;
             EnableReachChanges = enableReach;
             EnableSpeedChanges = enableSpeed;
+            KeywordEditorID = keywordEditorId;
         }
 
         /// <summary>
@@ -107,12 +117,44 @@ namespace SpeedAndReachFixesUpdated.SettingObjects
         }
 
         /// <summary>
-        /// Check if this WeaponStats object is not null, and not using default values.
+        /// Returns the configured FormKey if set, otherwise the keyword resolved from Editor ID at patch time.
+        /// </summary>
+        public IFormLinkGetter<IKeywordGetter> GetEffectiveKeyword()
+        {
+            if (!Keyword.IsNull)
+                return Keyword;
+            return _resolvedKeyword;
+        }
+
+        /// <summary>
+        /// Resolves KeywordEditorID against the active load order when Keyword is empty.
+        /// </summary>
+        /// <returns>True if this category has a usable keyword reference after resolution.</returns>
+        public bool ResolveKeyword(ILinkCache linkCache)
+        {
+            if (!Keyword.IsNull)
+                return true;
+
+            _resolvedKeyword = FormLink<IKeywordGetter>.Null;
+            if (string.IsNullOrWhiteSpace(KeywordEditorID))
+                return false;
+
+            if (linkCache.TryResolveIdentifier<IKeywordGetter>(KeywordEditorID, out var formKey))
+            {
+                _resolvedKeyword = new FormLink<IKeywordGetter>(formKey);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Check if this WeaponStats object has no usable keyword reference.
         /// </summary>
         /// <returns>bool</returns>
         public bool ShouldSkip()
         {
-            return Keyword.IsNull;
+            return GetEffectiveKeyword().IsNull;
         }
 
         /// <summary>
@@ -122,7 +164,8 @@ namespace SpeedAndReachFixesUpdated.SettingObjects
         /// <returns>int</returns>
         public int GetPriority(ExtendedList<IFormLinkGetter<IKeywordGetter>>? keywords)
         {
-            if ((keywords != null) && (!ShouldSkip()) && keywords.Any(kywd => Keyword.Equals(kywd)))
+            var keyword = GetEffectiveKeyword();
+            if ((keywords != null) && (!ShouldSkip()) && keywords.Any(kywd => keyword.Equals(kywd)))
                 return Priority;
             return Constants.DefaultPriority;
         }

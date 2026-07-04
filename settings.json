@@ -14,6 +14,7 @@
   },
   "WeaponStats": [
     {
+      "KeywordEditorID": "WeapTypeSword",
       "Keyword": "01E711:Skyrim.esm",
       "Priority": 1,
       "EnableReachChanges": true,
@@ -23,6 +24,7 @@
       "Speed": 1.1
     },
     {
+      "KeywordEditorID": "WeapTypeDagger",
       "Keyword": "01E713:Skyrim.esm",
       "Priority": 1,
       "EnableReachChanges": true,
@@ -32,6 +34,7 @@
       "Speed": 1.35
     },
     {
+      "KeywordEditorID": "WeapTypeWarAxe",
       "Keyword": "01E712:Skyrim.esm",
       "Priority": 1,
       "EnableReachChanges": true,
@@ -41,6 +44,7 @@
       "Speed": 1.0
     },
     {
+      "KeywordEditorID": "WeapTypeMace",
       "Keyword": "01E714:Skyrim.esm",
       "Priority": 1,
       "EnableReachChanges": true,
@@ -50,6 +54,7 @@
       "Speed": 0.9
     },
     {
+      "KeywordEditorID": "WeapTypeGreatsword",
       "Keyword": "06D931:Skyrim.esm",
       "Priority": 1,
       "EnableReachChanges": true,
@@ -59,6 +64,7 @@
       "Speed": 0.85
     },
     {
+      "KeywordEditorID": "WeapTypeBattleaxe",
       "Keyword": "06D932:Skyrim.esm",
       "Priority": 1,
       "EnableReachChanges": true,
@@ -68,6 +74,7 @@
       "Speed": 0.666667
     },
     {
+      "KeywordEditorID": "WeapTypeWarhammer",
       "Keyword": "06D930:Skyrim.esm",
       "Priority": 1,
       "EnableReachChanges": true,
@@ -77,6 +84,7 @@
       "Speed": 0.6
     },
     {
+      "KeywordEditorID": "WeapTypeRapier",
       "Keyword": "000801:NewArmoury.esp",
       "Priority": 2,
       "EnableReachChanges": true,
@@ -86,6 +94,7 @@
       "Speed": 0.0
     },
     {
+      "KeywordEditorID": "WeapTypeClaw",
       "Keyword": "19AAB4:NewArmoury.esp",
       "Priority": 2,
       "EnableReachChanges": true,
@@ -95,6 +104,7 @@
       "Speed": 0.0
     },
     {
+      "KeywordEditorID": "WeapTypeQtrStaff",
       "Keyword": "0E4581:NewArmoury.esp",
       "Priority": 2,
       "EnableReachChanges": true,
@@ -104,6 +114,7 @@
       "Speed": 0.0
     },
     {
+      "KeywordEditorID": "WeapTypeWhip",
       "Keyword": "20F2A1:NewArmoury.esp",
       "Priority": 2,
       "EnableReachChanges": true,
@@ -113,6 +124,7 @@
       "Speed": 0.0
     },
     {
+      "KeywordEditorID": "WeapTypePike",
       "Keyword": "0E457E:NewArmoury.esp",
       "Priority": 2,
       "EnableReachChanges": true,
@@ -122,6 +134,7 @@
       "Speed": 0.0
     },
     {
+      "KeywordEditorID": "WeapTypeHalberd",
       "Keyword": "0E4580:NewArmoury.esp",
       "Priority": 2,
       "EnableReachChanges": true,
