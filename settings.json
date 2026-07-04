@@ -14,94 +14,120 @@
   },
   "WeaponStats": [
     {
-      "Keyword": "06D932:Skyrim.esm",
-      "Priority": 1,
-      "IsAdditiveModifier": false,
-      "Reach": 0.8275,
-      "Speed": 0.666667
-    },
-    {
-      "Keyword": "01E713:Skyrim.esm",
-      "Priority": 1,
-      "IsAdditiveModifier": false,
-      "Reach": 0.533,
-      "Speed": 1.35
-    },
-    {
-      "Keyword": "06D931:Skyrim.esm",
-      "Priority": 1,
-      "IsAdditiveModifier": false,
-      "Reach": 0.88,
-      "Speed": 0.85
-    },
-    {
-      "Keyword": "01E714:Skyrim.esm",
-      "Priority": 1,
-      "IsAdditiveModifier": false,
-      "Reach": 0.75,
-      "Speed": 0.9
-    },
-    {
       "Keyword": "01E711:Skyrim.esm",
       "Priority": 1,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": true,
       "IsAdditiveModifier": false,
       "Reach": 0.83,
       "Speed": 1.1
     },
     {
+      "Keyword": "01E713:Skyrim.esm",
+      "Priority": 1,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": true,
+      "IsAdditiveModifier": false,
+      "Reach": 0.533,
+      "Speed": 1.35
+    },
+    {
       "Keyword": "01E712:Skyrim.esm",
       "Priority": 1,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": true,
       "IsAdditiveModifier": false,
       "Reach": 0.6,
       "Speed": 1.0
     },
     {
+      "Keyword": "01E714:Skyrim.esm",
+      "Priority": 1,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": true,
+      "IsAdditiveModifier": false,
+      "Reach": 0.75,
+      "Speed": 0.9
+    },
+    {
+      "Keyword": "06D931:Skyrim.esm",
+      "Priority": 1,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": true,
+      "IsAdditiveModifier": false,
+      "Reach": 0.88,
+      "Speed": 0.85
+    },
+    {
+      "Keyword": "06D932:Skyrim.esm",
+      "Priority": 1,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": true,
+      "IsAdditiveModifier": false,
+      "Reach": 0.8275,
+      "Speed": 0.666667
+    },
+    {
       "Keyword": "06D930:Skyrim.esm",
       "Priority": 1,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": true,
       "IsAdditiveModifier": false,
       "Reach": 0.8,
       "Speed": 0.6
     },
     {
+      "Keyword": "000801:NewArmoury.esp",
+      "Priority": 2,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": false,
+      "IsAdditiveModifier": false,
+      "Reach": 1.12,
+      "Speed": 0.0
+    },
+    {
       "Keyword": "19AAB4:NewArmoury.esp",
       "Priority": 2,
-      "IsAdditiveModifier": true,
-      "Reach": 0.41,
-      "Speed": 0.0
-    },
-    {
-      "Keyword": "0E4580:NewArmoury.esp",
-      "Priority": 2,
-      "IsAdditiveModifier": true,
-      "Reach": 0.58,
-      "Speed": 0.0
-    },
-    {
-      "Keyword": "0E457E:NewArmoury.esp",
-      "Priority": 2,
-      "IsAdditiveModifier": true,
-      "Reach": 0.2,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": false,
+      "IsAdditiveModifier": false,
+      "Reach": 0.6,
       "Speed": 0.0
     },
     {
       "Keyword": "0E4581:NewArmoury.esp",
       "Priority": 2,
-      "IsAdditiveModifier": true,
-      "Reach": 0.25,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": false,
+      "IsAdditiveModifier": false,
+      "Reach": 0.8,
       "Speed": 0.0
     },
     {
-      "Keyword": "000801:NewArmoury.esp",
+      "Keyword": "20F2A1:NewArmoury.esp",
       "Priority": 2,
-      "IsAdditiveModifier": true,
-      "Reach": 0.2,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": false,
+      "IsAdditiveModifier": false,
+      "Reach": 1.5,
       "Speed": 0.0
     },
     {
-      "Keyword": "31BD77:NewArmoury.esp",
+      "Keyword": "0E457E:NewArmoury.esp",
       "Priority": 2,
-      "IsAdditiveModifier": true,
-      "Reach": 0.5,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": false,
+      "IsAdditiveModifier": false,
+      "Reach": 1.2,
+      "Speed": 0.0
+    },
+    {
+      "Keyword": "0E4580:NewArmoury.esp",
+      "Priority": 2,
+      "EnableReachChanges": true,
+      "EnableSpeedChanges": false,
+      "IsAdditiveModifier": false,
+      "Reach": 1.0,
       "Speed": 0.0
     }
   ],

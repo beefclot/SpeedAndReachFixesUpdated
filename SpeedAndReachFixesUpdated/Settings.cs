@@ -40,19 +40,20 @@ namespace SpeedAndReachFixesUpdated
         [Tooltip("Change the stats of each weapon type.")]
         public List<WeaponStats> WeaponStats { get; set; } = new()
         {
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeBattleaxe, 0.666667F, 0.8275F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeDagger, 1.35F, 0.533F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeGreatsword, 0.85F, 0.88F),
-            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeMace, 0.9F, 0.75F),
             new WeaponStats(1, false, Skyrim.Keyword.WeapTypeSword, 1.1F, 0.83F),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeDagger, 1.35F, 0.533F),
             new WeaponStats(1, false, Skyrim.Keyword.WeapTypeWarAxe, 1F, 0.6F),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeMace, 0.9F, 0.75F),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeGreatsword, 0.85F, 0.88F),
+            new WeaponStats(1, false, Skyrim.Keyword.WeapTypeBattleaxe, 0.666667F, 0.8275F),
             new WeaponStats(1, false, Skyrim.Keyword.WeapTypeWarhammer, 0.6F, 0.8F),
-            new WeaponStats(2, true, NewArmoury.Keyword.WeapTypeClaw, Constants.NullFloat, 0.41F),
-            new WeaponStats(2, true, NewArmoury.Keyword.WeapTypeHalberd, Constants.NullFloat, 0.58F),
-            new WeaponStats(2, true, NewArmoury.Keyword.WeapTypePike, Constants.NullFloat, 0.2F),
-            new WeaponStats(2, true, NewArmoury.Keyword.WeapTypeQtrStaff, Constants.NullFloat, 0.25F),
-            new WeaponStats(2, true, NewArmoury.Keyword.WeapTypeRapier, Constants.NullFloat, 0.2F),
-            new WeaponStats(2, true, NewArmoury.Keyword.WeapTypeWhip, Constants.NullFloat, 0.5F),
+
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeRapier, Constants.NullFloat, 1.12F, enableSpeed: false),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeClaw, Constants.NullFloat, 0.6F, enableSpeed: false),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeQtrStaff, Constants.NullFloat, 0.8F, enableSpeed: false),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeWhip, Constants.NullFloat, 1.5F, enableSpeed: false),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypePike, Constants.NullFloat, 1.2F, enableSpeed: false),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeHalberd, Constants.NullFloat, 1.0F, enableSpeed: false),
         };
 
         [SettingName("Verbose Log")]
@@ -96,14 +97,14 @@ namespace SpeedAndReachFixesUpdated
             if (stats.ShouldSkip())
                 return (false, false);
 
-            // Apply reach changes if they are enabled globally
+            // Apply reach changes if they are enabled globally and for this category
             bool changedReach = false;
-            if (EnableReachChangesGlobal)
+            if (EnableReachChangesGlobal && stats.EnableReachChanges)
                 weapon.Data.Reach = stats.GetReach(weapon.Data.Reach, out changedReach);
 
-            // Apply speed changes if they are enabled globally
+            // Apply speed changes if they are enabled globally and for this category
             bool changedSpeed = false;
-            if (EnableSpeedChangesGlobal)
+            if (EnableSpeedChangesGlobal && stats.EnableSpeedChanges)
                 weapon.Data.Speed = stats.GetSpeed(weapon.Data.Speed, out changedSpeed);
 
             // Revert any reach changes to giant clubs as they may cause issues with the AI

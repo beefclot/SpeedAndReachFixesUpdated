@@ -22,10 +22,10 @@ namespace Mutagen.Bethesda.FormKeys.SkyrimSE
             public static FormLink<IKeywordGetter> NAR_Sig => Construct(0x20509e);
             public static FormLink<IKeywordGetter> AltDagger => Construct(0x2b65bb);
             public static FormLink<IKeywordGetter> AltMace => Construct(0x2b65bc);
-            public static FormLink<IKeywordGetter> WeapTypeWhip => Construct(0x31bd77);
-            public static FormLink<IKeywordGetter> NA_UniIWhp => Construct(0x31bd78);
-            public static FormLink<IKeywordGetter> NA_UniEWhp => Construct(0x31bd79);
-            public static FormLink<IKeywordGetter> NA_UniFWhp => Construct(0x31bd7a);
+            public static FormLink<IKeywordGetter> WeapTypeWhip => Construct(0x20f2a1);
+            public static FormLink<IKeywordGetter> NA_UniIWhp => Construct(0x292e9f);
+            public static FormLink<IKeywordGetter> NA_UniEWhp => Construct(0x292ea0);
+            public static FormLink<IKeywordGetter> NA_UniFWhp => Construct(0x292ea1);
         }
     }
 }

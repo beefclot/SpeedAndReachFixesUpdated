@@ -14,11 +14,20 @@ namespace SpeedAndReachFixesUpdated.SettingObjects
     {
         [MaintainOrder]
 
-        [Tooltip("The keyword/type of weapon that this category applies to.")]
-        public FormLink<IKeywordGetter> Keyword;
+        [FormLinkPickerCustomization(typeof(IKeywordGetter))]
+        [Tooltip("The keyword/type of weapon that this category applies to. Search by Editor ID, FormKey, or FormID from the active load order.")]
+        public IFormLinkGetter<IKeywordGetter> Keyword = FormLink<IKeywordGetter>.Null;
 
         [Tooltip("If multiple categories could apply to the same weapon, the highest priority one wins.")]
         public int Priority;
+
+        [SettingName("Apply Reach Changes")]
+        [Tooltip("When unchecked, reach changes for this category are skipped.")]
+        public bool EnableReachChanges = true;
+
+        [SettingName("Apply Speed Changes")]
+        [Tooltip("When unchecked, speed changes for this category are skipped.")]
+        public bool EnableSpeedChanges = true;
 
         [SettingName("Add to Current Stats")]
         [Tooltip("When checked, the reach & speed stats in this category are added to the current stats, rather than overwriting them. Negative values are allowed.")]
@@ -35,20 +44,27 @@ namespace SpeedAndReachFixesUpdated.SettingObjects
         {
             Priority = 0;
             IsAdditiveModifier = true;
-            Keyword = new();
-            Keyword.SetToNull(); // set keyword to null (all 0s)
             Reach = Constants.NullFloat;
             Speed = Constants.NullFloat;
         }
 
         // Constructor
-        public WeaponStats(int priority, bool modifier, FormLink<IKeywordGetter> keyword, float speed = Constants.NullFloat, float reach = Constants.NullFloat)
+        public WeaponStats(
+            int priority,
+            bool modifier,
+            IFormLinkGetter<IKeywordGetter> keyword,
+            float speed = Constants.NullFloat,
+            float reach = Constants.NullFloat,
+            bool enableReach = true,
+            bool enableSpeed = true)
         {
             Priority = priority;
             IsAdditiveModifier = modifier;
             Keyword = keyword;
             Reach = reach;
             Speed = speed;
+            EnableReachChanges = enableReach;
+            EnableSpeedChanges = enableSpeed;
         }
 
         /// <summary>
