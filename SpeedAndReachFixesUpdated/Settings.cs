@@ -50,7 +50,7 @@ namespace SpeedAndReachFixesUpdated
             new WeaponStats(1, false, Skyrim.Keyword.WeapTypeBattleaxe, 0.666667F, 0.8275F, keywordEditorId: "WeapTypeBattleaxe"),
             new WeaponStats(1, false, Skyrim.Keyword.WeapTypeWarhammer, 0.6F, 0.8F, keywordEditorId: "WeapTypeWarhammer"),
 
-            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeRapier, Constants.NullFloat, 1.12F, enableSpeed: false, keywordEditorId: "WeapTypeRapier"),
+            new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeRapier, Constants.NullFloat, 0.8F, enableSpeed: false, keywordEditorId: "WeapTypeRapier"),
             new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeClaw, Constants.NullFloat, 0.6F, enableSpeed: false, keywordEditorId: "WeapTypeClaw"),
             new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeQtrStaff, Constants.NullFloat, 0.8F, enableSpeed: false, keywordEditorId: "WeapTypeQtrStaff"),
             new WeaponStats(2, false, NewArmoury.Keyword.WeapTypeWhip, Constants.NullFloat, 1.5F, enableSpeed: false, keywordEditorId: "WeapTypeWhip"),

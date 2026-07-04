@@ -90,7 +90,7 @@
       "EnableReachChanges": true,
       "EnableSpeedChanges": false,
       "IsAdditiveModifier": false,
-      "Reach": 1.12,
+      "Reach": 0.8,
       "Speed": 0.0
     },
     {
